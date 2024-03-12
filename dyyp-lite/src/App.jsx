@@ -1,33 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  let [cryptoList, setCryptoList] = useState(null);
+  useEffect(() => {
+    const fetchAllCoinData = () => {
+      fetch(`https://min-api.cryptocompare.com/data/all/coinlist?api_key=${import.meta.env.VITE_APP_ACCESS_KEY}`)
+      .then(response => response.json())
+      .then(data => setCryptoList(data))
+      .catch(err => console.log("There was an error: " + toString(err)))
+    }
+
+    fetchAllCoinData();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="App">
+        <section className="crypto-list-section">
+          <div className="crypto-list-container">
+            <h1 className="crypto-list-title">My Crypto</h1>
+            <ul className="crypto-list">
+              {cryptoList && Object.entries(cryptoList.Data).map(([coin]) => 
+                cryptoList.Data[coin].PlatformType=="blockchain" ? (
+                  <li className="crypto-item"
+                  key={cryptoList.Data[coin].FullName}>{cryptoList.Data[coin].FullName}</li>
+                ) : null
+              )}
+            </ul>
+          </div>
+        </section>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
