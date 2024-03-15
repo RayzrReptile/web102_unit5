@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import CoinInfo from './components/CoinInfo';
 import './App.css'
 
 function App() {
@@ -23,8 +24,11 @@ function App() {
             <ul className="crypto-list">
               {cryptoList && Object.entries(cryptoList.Data).map(([coin]) => 
                 cryptoList.Data[coin].PlatformType=="blockchain" ? (
-                  <li className="crypto-item"
-                  key={cryptoList.Data[coin].FullName}>{cryptoList.Data[coin].FullName}</li>
+                  <CoinInfo
+                    image={cryptoList.Data[coin].ImageUrl}
+                    name={cryptoList.Data[coin].FullName}
+                    symbol={cryptoList.Data[coin].Symbol}
+                  />
                 ) : null
               )}
             </ul>
