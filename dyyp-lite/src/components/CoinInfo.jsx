@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const CoinInfo = ({image, name, symbol}) => {
     // Variables
-    const [price, setPrice] = useState(null)
+    let [price, setPrice] = useState(null)
 
     useEffect(() => {
         const getCoinPrice = () => {
@@ -10,7 +10,11 @@ const CoinInfo = ({image, name, symbol}) => {
             fetch(query)
             .then(response => response.json())
             .then(data => setPrice(data))
-            .catch(console.error)
+            .catch(() => {
+                console.error;
+                console.log("Set price to null")
+                setPrice(null);
+            })
         }
 
         getCoinPrice();
