@@ -44,7 +44,7 @@ function App() {
       <div className="App">
         <section className="header-section">
           <div className="header-title-wrapper">
-            <img src="DYYPLogoV6.png" alt="DYYP Logo" className="header-logo" />
+            <img draggable="false" src="DYYPLogoV6.png" alt="DYYP Logo" className="header-logo" />
             <h3 className="subtitle">desktop</h3>
           </div>
           <div className="header-search-wrapper">
@@ -62,6 +62,7 @@ function App() {
                 <div className="found-results">
                 <h3>Showing all coins</h3>
                 </div>
+                <hr />
                 <ul className="crypto-list">
                   {cryptoList && Object.entries(cryptoList.Data).map(([coin]) => 
                     cryptoList.Data[coin].PlatformType=="blockchain" ? (
@@ -85,6 +86,7 @@ function App() {
                         <h3>Showing {searchResults.length} results found for "{searchInput}"</h3>
                       )}
                     </div>
+                    <hr />
                     <ul className="crypto-list">
                       {searchResults && searchResults.map((coin) => 
                         cryptoList.Data[coin].PlatformType=="blockchain" ? (

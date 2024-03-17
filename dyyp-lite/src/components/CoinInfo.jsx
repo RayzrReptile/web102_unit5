@@ -25,6 +25,7 @@ const CoinInfo = ({image, name, symbol}) => {
             <li className="coin-info-item" key={symbol}>
                 <div className="image-wrapper">
                     <img 
+                    draggable="false"
                     src={`https://www.cryptocompare.com${image}`} 
                     alt={name} 
                     className="coin-image" />
@@ -32,7 +33,11 @@ const CoinInfo = ({image, name, symbol}) => {
                 <div className="info-wrapper">
                     <h2 className="coin-name">{name}</h2>
                     <h4 className="coin-symbol">{symbol}</h4>
-                    <h2 className="coin-price">${price.USD} USD</h2>
+                    <div>
+                        {price.USD != null && price.USD != "" ? (
+                            <h2 className="coin-price">${price.USD} USD</h2>
+                    ) : <h2 className="coin-price">Price Unlisted</h2>}
+                    </div>
                 </div>
             </li>
         ) : null}
