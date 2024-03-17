@@ -44,7 +44,7 @@ function App() {
       <div className="App">
         <section className="header-section">
           <div className="header-title-wrapper">
-            <h1 className="title">DYYP</h1>
+            <img src="DYYPLogoV6.png" alt="DYYP Logo" className="header-logo" />
             <h3 className="subtitle">desktop</h3>
           </div>
           <div className="header-search-wrapper">
